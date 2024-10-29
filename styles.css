@@ -16,4 +16,8 @@ h2 {
 video, img {
     margin-top: 20px;
     border: 1px solid #ccc;
+}
+
+.player {
+    min-height: 400px; /* 设置最小高度以保持布局 */
 } 

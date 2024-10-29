@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     const videoElements = [
-        { id: 'video-1', src: 'https://streaming1.dsatmacau.com/traffic/m2029.m3u8', thumbnailId: 'thumbnail-1', titleId: 'video-title-1' },
-        { id: 'video-2', src: 'https://streaming1.dsatmacau.com/traffic/m2092.m3u8', thumbnailId: 'thumbnail-2', titleId: 'video-title-2' }
+        { id: 'video-1', src: 'https://streaming1.dsatmacau.com/traffic/m2029.m3u8', thumbnailId: 'thumbnail-1', titleId: 'video-title-1', buttonId: 'toggle-video-1' },
+        { id: 'video-2', src: 'https://streaming1.dsatmacau.com/traffic/m2092.m3u8', thumbnailId: 'thumbnail-2', titleId: 'video-title-2', buttonId: 'toggle-video-2' }
     ];
 
     videoElements.forEach(video => {
         const videoElement = document.getElementById(video.id);
         const thumbnail = document.getElementById(video.thumbnailId);
+        const toggleButton = document.getElementById(video.buttonId);
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
 
@@ -37,6 +38,16 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (error) {
                 console.error('Error generating thumbnail:', error);
                 thumbnail.alt = '无法加载预览图';
+            }
+        });
+
+        toggleButton.addEventListener('click', () => {
+            if (videoElement.style.visibility === 'hidden') {
+                videoElement.style.visibility = 'visible';
+                toggleButton.textContent = '隱藏視頻';
+            } else {
+                videoElement.style.visibility = 'hidden';
+                toggleButton.textContent = '顯示視頻';
             }
         });
     });
