@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     videoElements.forEach(video => {
         const videoElement = document.getElementById(video.id);
         const thumbnail = document.getElementById(video.thumbnailId);
-        const videoTitleElement = document.getElementById(video.titleId);
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
 
@@ -30,10 +29,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         videoElement.onloadeddata = () => {
-            canvas.width = videoElement.videoWidth;
-            canvas.height = videoElement.videoHeight;
-            context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-            thumbnail.src = canvas.toDataURL('image/png');
+            try {
+                canvas.width = videoElement.videoWidth;
+                canvas.height = videoElement.videoHeight;
+                context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+                thumbnail.src = canvas.toDataURL('image/png');
+            } catch (error) {
+                console.error('Error generating thumbnail:', error);
+                thumbnail.alt = '无法加载预览图';
+            }
         };
     });
 }); 
