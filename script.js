@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        videoElement.onloadeddata = () => {
+        videoElement.addEventListener('canplay', () => {
             try {
                 canvas.width = videoElement.videoWidth;
                 canvas.height = videoElement.videoHeight;
@@ -38,6 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Error generating thumbnail:', error);
                 thumbnail.alt = '无法加载预览图';
             }
-        };
+        });
     });
 }); 
